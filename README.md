@@ -13,45 +13,36 @@
 
 <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
 
-## References
+## Development
 
-[• Notes Dart](https://devtalles.com/files/dart-cheat-sheet.pdf)
-
-[• Notes Flutter](https://devtalles.com/files/flutter-cheat-sheet.pdf)
+```bash
+# Implementations
+1. Copy the file .env.example and rename it to .env
+2. Add your API KEY in the .env file
+3. Run the project
+```
 
 <br/>
 
-## Utils Links
-[• QuickType](https://app.quicktype.io/)
-[• Libraries](https://pub.dev/)
-[• Provider](https://pub.dev/packages/provider/install)
-[• dio](https://pub.dev/packages/dio)
+## Dependences
 [• go_router](https://pub.dev/packages/go_router)
+[• flutter_dotenv](https://pub.dev/packages/flutter_dotenv)
 
 
 <br/>
 <hr/>
 
-## Code Guide
+## Code Helpers
 
 ```bash
 # Modify the most recent commit message
 $ git commit --amend -m "an updated commit message"
 ```
 
-## Others
-<br/>
+<hr/>
 
-<details><summary>Pubspec Assist (Dependences)</summary>
-<ol>
-  <li>go_router</li>
-  <li>provider</li>
-  <li>intl</li>
-  <li>animate_do</li>
-  <li>video_player</li>
-</ol>
-</details>
-<br/>
+
+## Others
 
 <details><summary>Documentation</summary>
 <ul>
@@ -73,6 +64,22 @@ $ flutter pub add dio
 
 ```
 </details><br/>
+
+<hr/>
+
+## Utils
+
+[• Notes Dart](https://devtalles.com/files/dart-cheat-sheet.pdf)
+
+[• Notes Flutter](https://devtalles.com/files/flutter-cheat-sheet.pdf)
+
+[• QuickType](https://app.quicktype.io/)
+
+[• TMDB API](https://www.themoviedb.org/settings/api)
+<!-- user: jalzdelezz -> jameslo***gmail.com -->
+<!-- pass: ze**qc46 -->
+<!-- key: 565abbc587f9eee9822e337179ba5ab4X -->
+
 
 <hr/>
 
