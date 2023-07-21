@@ -1,4 +1,6 @@
 import 'package:cinema_movie/config/constants/environment.dart';
+import 'package:cinema_movie/infrastructure/mappers/movie_mapper.dart';
+import 'package:cinema_movie/infrastructure/models/moviedb/moviedb_res.dart';
 import 'package:dio/dio.dart';
 import 'package:cinema_movie/domain/datasources/movies_datasource.dart';
 import 'package:cinema_movie/domain/entities/movie.dart';
@@ -16,7 +18,13 @@ class MoviedbDatasource extends MoviesDataSource {
       'page': page,
     });
 
-    final List<Movie> movies = [];
-    return [];
+    final moviesRes = MovieDbResponse.fromJson(res.data);
+
+    final List<Movie> movies = moviesRes.results
+        .where((e) => e.posterPath != 'no-poster')
+        .map((e2) => MovieMapper.movieDBtoEntity(e2))
+        .toList();
+
+    return movies;
   }
 }
