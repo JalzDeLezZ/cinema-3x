@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:cinema_movie/config/constants/environment.dart';
 import 'package:cinema_movie/infrastructure/mappers/movie_mapper.dart';
 import 'package:cinema_movie/infrastructure/models/moviedb/moviedb_res.dart';
@@ -25,6 +27,7 @@ class MoviedbDatasource extends MoviesDataSource {
         .map((e2) => MovieMapper.movieDBtoEntity(e2))
         .toList();
 
+    print('MOVIE DB RESPONSE: ${moviesRes.results[0].toJson()}');
     return movies;
   }
 }
