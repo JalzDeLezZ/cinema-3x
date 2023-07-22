@@ -39,6 +39,15 @@
 ```bash
 # Modify the most recent commit message
 $ git commit --amend -m "an updated commit message"
+# Create Tag release
+$ git tag -a v1.0.0 -m "Version 1.0.0"
+# Push Tag release
+$ git push --tags || git push origin v1.0.0
+# Delete Tag release
+$ git tag -d v1.0.0
+# Delete Tag release in remote
+$ git push --delete origin v1.0.0
+#! Before edit tag and create release in github and add description
 ```
 
 <hr/>
