@@ -1,5 +1,5 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables
-import 'package:cinema_movie/presentation/providers/movies/movies_providers.dart';
+import 'package:cinema_movie/presentation/providers/providers.dart';
 import 'package:cinema_movie/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -32,12 +32,13 @@ class _HomeViewState extends ConsumerState<_HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    final newPlayingMovies = ref.watch(nowPlayingMoviesProvider);
+    // final newPlayingMovies = ref.watch(nowPlayingMoviesProvider);
+    final slideShowMovies = ref.watch(moviesSlideshowProvider);
 
     return Column(
       children: [
         const CustomAppbar(),
-        MoviesSlideshow(movies: newPlayingMovies)
+        MoviesSlideshow(movies: slideShowMovies)
         /* Expanded(  child: ListView.builder(    itemCount: movies.length,    itemBuilder: (context, index) {      final movie = movies[index];      return ListTile(        title: Text(movie.title),      );    },  ),) */
       ],
     );
