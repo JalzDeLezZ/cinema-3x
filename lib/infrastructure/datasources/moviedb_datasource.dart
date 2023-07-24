@@ -27,7 +27,6 @@ class MoviedbDatasource extends MoviesDataSource {
         .map((e2) => MovieMapper.movieDBtoEntity(e2))
         .toList();
 
-    print('MOVIE DB RESPONSE: ${moviesRes.results[0].toJson()}');
     return movies;
   }
 }
