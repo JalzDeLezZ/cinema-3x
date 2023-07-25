@@ -31,6 +31,7 @@
 [• flutter_riverpod](https://pub.dev/packages/flutter_riverpod)
 [• card_swiper](https://pub.dev/packages/card_swiper)
 [• animate_do](https://pub.dev/packages/animate_do)
+[• intl](https://pub.dev/packages/intl)
 
 
 <br/>
