@@ -37,17 +37,49 @@ class _HomeViewState extends ConsumerState<_HomeView> {
     final newPlayingMovies = ref.watch(nowPlayingMoviesProvider);
     final slideShowMovies = ref.watch(moviesSlideshowProvider);
 
-    return Column(
-      children: [
-        const CustomAppbar(),
-        MoviesSlideshow(movies: slideShowMovies),
-        MovieHorizontalListview(
-            movies: newPlayingMovies,
-            title: 'En Cines',
-            subtitle: 'Lunes 20',
-            onNextPage: () =>
-                ref.read(nowPlayingMoviesProvider.notifier).loadNextPage()),
-      ],
-    );
+    return CustomScrollView(slivers: [
+
+      const SliverAppBar(
+        floating: true,
+        flexibleSpace: FlexibleSpaceBar(
+          title: CustomAppbar(),
+          titlePadding: EdgeInsets.zero,
+          centerTitle: false,
+        ),
+      ),
+
+      SliverList(
+          delegate: SliverChildBuilderDelegate((context, index) {
+        return Column(
+          children: [
+            MoviesSlideshow(movies: slideShowMovies),
+            MovieHorizontalListview(
+                movies: newPlayingMovies,
+                title: 'En Cines',
+                subtitle: 'Lunes 20',
+                onNextPage: () =>
+                    ref.read(nowPlayingMoviesProvider.notifier).loadNextPage()),
+            MovieHorizontalListview(
+                movies: newPlayingMovies,
+                title: 'Próximamente',
+                subtitle: 'Este mes',
+                onNextPage: () =>
+                    ref.read(nowPlayingMoviesProvider.notifier).loadNextPage()),
+            MovieHorizontalListview(
+                movies: newPlayingMovies,
+                title: 'Populares',
+                onNextPage: () =>
+                    ref.read(nowPlayingMoviesProvider.notifier).loadNextPage()),
+            MovieHorizontalListview(
+                movies: newPlayingMovies,
+                title: 'Mejor calificadas',
+                subtitle: 'All time',
+                onNextPage: () =>
+                    ref.read(nowPlayingMoviesProvider.notifier).loadNextPage()),
+            const SizedBox(height: 10)
+          ],
+        );
+      }, childCount: 1))
+    ]);
   }
 }
