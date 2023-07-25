@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_literals_to_create_immutables, avoid_print
 import 'package:cinema_movie/presentation/providers/providers.dart';
 import 'package:cinema_movie/presentation/screens/movies/movie_horizontal_listview.dart';
 import 'package:cinema_movie/presentation/widgets/widgets.dart';
@@ -41,7 +41,12 @@ class _HomeViewState extends ConsumerState<_HomeView> {
       children: [
         const CustomAppbar(),
         MoviesSlideshow(movies: slideShowMovies),
-        MovieHorizontalListview(movies: newPlayingMovies, title: 'En Cines', subtitle: 'Lunes 20',)
+        MovieHorizontalListview(
+            movies: newPlayingMovies,
+            title: 'En Cines',
+            subtitle: 'Lunes 20',
+            onNextPage: () =>
+                ref.read(nowPlayingMoviesProvider.notifier).loadNextPage()),
       ],
     );
   }
