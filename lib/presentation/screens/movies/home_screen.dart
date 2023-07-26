@@ -31,6 +31,8 @@ class _HomeViewState extends ConsumerState<_HomeView> {
     super.initState();
     ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
     ref.read(popularMoviesProvider.notifier).loadNextPage();
+    ref.read(upcomingMoviesProvider.notifier).loadNextPage();
+    ref.read(topRatedMoviesProvider.notifier).loadNextPage();
   }
 
   @override
@@ -38,6 +40,8 @@ class _HomeViewState extends ConsumerState<_HomeView> {
     final newPlayingMovies = ref.watch(nowPlayingMoviesProvider);
     final slideShowMovies = ref.watch(moviesSlideshowProvider);
     final popularMovies = ref.watch(popularMoviesProvider);
+    final upcomingMovies = ref.watch(upcomingMoviesProvider);
+    final topRatedMovies = ref.watch(topRatedMoviesProvider);
 
     return CustomScrollView(slivers: [
 
@@ -62,22 +66,22 @@ class _HomeViewState extends ConsumerState<_HomeView> {
                 onNextPage: () =>
                     ref.read(nowPlayingMoviesProvider.notifier).loadNextPage()),
             MovieHorizontalListview(
-                movies: newPlayingMovies,
+                movies: upcomingMovies,
                 title: 'Próximamente',
                 subtitle: 'Este mes',
                 onNextPage: () =>
-                    ref.read(nowPlayingMoviesProvider.notifier).loadNextPage()),
+                    ref.read(upcomingMoviesProvider.notifier).loadNextPage()),
             MovieHorizontalListview(
                 movies: popularMovies,
                 title: 'Populares',
                 onNextPage: () =>
                     ref.read(popularMoviesProvider.notifier).loadNextPage()),
             MovieHorizontalListview(
-                movies: newPlayingMovies,
+                movies: topRatedMovies,
                 title: 'Mejor calificadas',
                 subtitle: 'All time',
                 onNextPage: () =>
-                    ref.read(nowPlayingMoviesProvider.notifier).loadNextPage()),
+                    ref.read(topRatedMoviesProvider.notifier).loadNextPage()),
             const SizedBox(height: 10)
           ],
         );
