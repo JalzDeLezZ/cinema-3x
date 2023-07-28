@@ -1,5 +1,6 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:cinema_movie/domain/entities/movie.dart';
-import 'package:cinema_movie/presentation/providers/movies/movie_detail_provider.dart';
+import 'package:cinema_movie/presentation/providers/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -16,8 +17,9 @@ class MovieScreen extends ConsumerStatefulWidget {
 class MovieScreenState extends ConsumerState<MovieScreen> {
   @override
   void initState() {
-    ref.read(movieInfoProvider.notifier).loadMovie(widget.movieId);
     super.initState();
+    ref.read(movieInfoProvider.notifier).loadMovie(widget.movieId);
+    ref.read(actorsByMovieProvider.notifier).loadActors(widget.movieId);
   }
 
   @override
@@ -65,19 +67,16 @@ class _CustomSliverAppBar extends StatelessWidget {
           titlePadding:
               const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           centerTitle: false,
-          title: Text(
-            movie.title,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-            textAlign: TextAlign.start,
-          ),
+          /* title: Text(movie.title,style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold,),textAlign: TextAlign.start */
           background: Stack(children: [
             SizedBox.expand(
               child: Image.network(
                 movie.posterPath,
                 fit: BoxFit.cover,
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress != null) return const SizedBox();
+                  return FadeIn(child: child);
+                },
               ),
             ),
             const SizedBox.expand(
@@ -148,8 +147,63 @@ class _MovieDetails extends StatelessWidget {
                   .toList(),
             )),
 
-        const SizedBox(height: 60),
+        //! Actors
+        _ActorsByMovie(movieId: movie.id.toString()),
+
+        const SizedBox(height: 40),
       ],
+    );
+  }
+}
+
+class _ActorsByMovie extends ConsumerWidget {
+  final String movieId;
+
+  const _ActorsByMovie({required this.movieId});
+
+  @override
+  Widget build(BuildContext context, ref) {
+    //? Get Actors by Movie
+    final actorsByMovie = ref.watch(actorsByMovieProvider);
+
+    if (actorsByMovie[movieId] == null) {
+      return const Center(child: CircularProgressIndicator());
+    }
+    final actors = actorsByMovie[movieId]!;
+
+    return SizedBox(
+      height: 300,
+      child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: actors.length,
+          itemBuilder: (context, index) {
+            final actor = actors[index];
+            return Container(
+              padding: const EdgeInsets.all(8),
+              width: 135,
+              child: Column(children: [
+                //? Actor Photo
+                FadeInRight(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.network(actor.profilePath,
+                        width: 135, height: 180, fit: BoxFit.cover),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                //? Actor Name
+                Text(actor.name,
+                    maxLines: 2, style: Theme.of(context).textTheme.bodySmall),
+                //? Actor Character
+                Text(actor.character ?? '',
+                    maxLines: 2,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        overflow: TextOverflow.ellipsis)),
+              ]),
+            );
+          }),
     );
   }
 }
