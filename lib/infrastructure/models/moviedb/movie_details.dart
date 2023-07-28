@@ -114,20 +114,20 @@ class BelongsToCollection {
     final int id;
     final String name;
     final String posterPath;
-    final String backdropPath;
+    final String? backdropPath;
 
     BelongsToCollection({
         required this.id,
         required this.name,
         required this.posterPath,
-        required this.backdropPath,
+        this.backdropPath,
     });
 
     factory BelongsToCollection.fromJson(Map<String, dynamic> json) => BelongsToCollection(
         id: json["id"],
         name: json["name"],
         posterPath: json["poster_path"],
-        backdropPath: json["backdrop_path"],
+        backdropPath: json["backdrop_path"] ?? '',
     );
 
     Map<String, dynamic> toJson() => {
@@ -160,13 +160,13 @@ class Genre {
 
 class ProductionCompany {
     final int id;
-    final String logoPath;
+    final String? logoPath;
     final String name;
     final String originCountry;
 
     ProductionCompany({
         required this.id,
-        required this.logoPath,
+        this.logoPath,
         required this.name,
         required this.originCountry,
     });
