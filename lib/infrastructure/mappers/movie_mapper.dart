@@ -19,7 +19,8 @@ class MovieMapper {
       posterPath: (movie_.posterPath != '')
           ? 'https://image.tmdb.org/t/p/w500${movie_.posterPath}'
           : 'no-poster',
-      releaseDate: movie_.releaseDate,
+      releaseDate:
+          (movie_.releaseDate != null) ? movie_.releaseDate : DateTime.now(),
       title: movie_.title,
       video: movie_.video,
       voteAverage: movie_.voteAverage,

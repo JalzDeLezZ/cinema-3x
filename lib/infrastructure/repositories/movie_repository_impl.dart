@@ -10,12 +10,12 @@ class MovieRepositoryImpl extends MoviesRepository {
   Future<List<Movie>> getNowPlaying({int page = 1}) {
     return innDataSource.getNowPlaying(page: page);
   }
-  
+
   @override
   Future<List<Movie>> getPopular({int page = 1}) {
     return innDataSource.getPopular(page: page);
   }
-  
+
   @override
   Future<List<Movie>> getTopRated({int page = 1}) {
     return innDataSource.getTopRated(page: page);
@@ -25,9 +25,14 @@ class MovieRepositoryImpl extends MoviesRepository {
   Future<List<Movie>> getUpcomming({int page = 1}) {
     return innDataSource.getUpcomming(page: page);
   }
-  
+
   @override
   Future<Movie> getMovieById(String id) {
     return innDataSource.getMovieById(id);
+  }
+
+  @override
+  Future<List<Movie>> searchMovies(String query) {
+    return innDataSource.searchMovies(query);
   }
 }
