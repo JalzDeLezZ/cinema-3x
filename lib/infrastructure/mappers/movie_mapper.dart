@@ -18,7 +18,7 @@ class MovieMapper {
       popularity: movie_.popularity,
       posterPath: (movie_.posterPath != '')
           ? 'https://image.tmdb.org/t/p/w500${movie_.posterPath}'
-          : 'no-poster',
+          : 'https://www.movienewsletters.net/photos/000000H1.jpg',
       releaseDate:
           (movie_.releaseDate != null) ? movie_.releaseDate : DateTime.now(),
       title: movie_.title,
@@ -41,7 +41,7 @@ class MovieMapper {
       popularity: movie_.popularity,
       posterPath: (movie_.posterPath != '')
           ? 'https://image.tmdb.org/t/p/w500${movie_.posterPath}'
-          : 'no-poster',
+          : 'https://www.movienewsletters.net/photos/000000H1.jpg',
       releaseDate: movie_.releaseDate,
       title: movie_.title,
       video: movie_.video,
