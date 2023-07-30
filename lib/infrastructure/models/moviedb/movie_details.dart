@@ -11,7 +11,7 @@ class MovieDetail {
     final String originalTitle;
     final String overview;
     final double popularity;
-    final String posterPath;
+    final String? posterPath;
     final List<ProductionCompany> productionCompanies;
     final List<ProductionCountry> productionCountries;
     final DateTime releaseDate;
@@ -38,7 +38,7 @@ class MovieDetail {
         required this.originalTitle,
         required this.overview,
         required this.popularity,
-        required this.posterPath,
+        this.posterPath,
         required this.productionCompanies,
         required this.productionCountries,
         required this.releaseDate,
@@ -66,7 +66,7 @@ class MovieDetail {
         originalTitle: json["original_title"],
         overview: json["overview"],
         popularity: json["popularity"]?.toDouble(),
-        posterPath: json["poster_path"],
+        posterPath: json["poster_path"] ?? 'https://www.movienewsletters.net/photos/000000H1.jpg',
         productionCompanies: List<ProductionCompany>.from(json["production_companies"].map((x) => ProductionCompany.fromJson(x))),
         productionCountries: List<ProductionCountry>.from(json["production_countries"].map((x) => ProductionCountry.fromJson(x))),
         releaseDate: DateTime.parse(json["release_date"]),
@@ -113,20 +113,20 @@ class MovieDetail {
 class BelongsToCollection {
     final int id;
     final String name;
-    final String posterPath;
+    final String? posterPath;
     final String? backdropPath;
 
     BelongsToCollection({
         required this.id,
         required this.name,
-        required this.posterPath,
+        this.posterPath,
         this.backdropPath,
     });
 
     factory BelongsToCollection.fromJson(Map<String, dynamic> json) => BelongsToCollection(
         id: json["id"],
         name: json["name"],
-        posterPath: json["poster_path"],
+        posterPath: json["poster_path"] ?? 'https://www.movienewsletters.net/photos/000000H1.jpg',
         backdropPath: json["backdrop_path"] ?? '',
     );
 

@@ -1,7 +1,11 @@
+// ignore_for_file: avoid_print
+
+import 'package:cinema_movie/domain/entities/movie.dart';
 import 'package:cinema_movie/presentation/delegates/search_movie_delegate.dart';
 import 'package:cinema_movie/presentation/providers/movies/movies_repository_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class CustomAppbar extends ConsumerWidget {
   const CustomAppbar({Key? key}) : super(key: key);
@@ -27,10 +31,13 @@ class CustomAppbar extends ConsumerWidget {
               onPressed: () {
                 final movieRepository = ref.read(movieRepositoryProvider);
 
-                showSearch(
-                    context: context,
-                    delegate: SeearchMovieDelegate(
-                        searchMovieCallback: movieRepository.searchMovies));
+                showSearch<Movie?>(
+                        context: context,
+                        delegate: SeearchMovieDelegate(
+                            searchMovieCallback: movieRepository.searchMovies))
+                    .then((value) {
+                  if (value != null) context.push('/movie/${value.id}');
+                });
               },
             ),
           ],
