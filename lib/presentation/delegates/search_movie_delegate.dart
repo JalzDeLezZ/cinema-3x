@@ -9,19 +9,18 @@ import 'package:flutter/material.dart';
 typedef SearchMovieCallback = Future<List<Movie>> Function(String query);
 
 class SeearchMovieDelegate extends SearchDelegate<Movie?> {
+  final List<Movie> initialMovies;
   final SearchMovieCallback searchMovieCallback;
   StreamController<List<Movie>> debounceMovies = StreamController.broadcast();
   Timer? _debouncedTimer;
 
-  SeearchMovieDelegate({required this.searchMovieCallback});
+  SeearchMovieDelegate(
+      {required this.initialMovies, required this.searchMovieCallback});
   void _onQueryChanged(String query) {
     print('Query Changed: $query');
     if (_debouncedTimer?.isActive ?? false) _debouncedTimer!.cancel();
     _debouncedTimer = Timer(const Duration(milliseconds: 500), () async {
-      if (query.isEmpty) {
-        debounceMovies.add([]);
-        return;
-      }
+      // find movies
       final movies = await searchMovieCallback(query);
       debounceMovies.add(movies);
     });
@@ -68,7 +67,7 @@ class SeearchMovieDelegate extends SearchDelegate<Movie?> {
     return StreamBuilder(
         // future: searchMovieCallback(query),
         stream: debounceMovies.stream,
-        initialData: const [],
+        initialData: initialMovies,
         builder: (context, snapshot) {
           final movies = snapshot.data ?? [];
           return ListView.builder(
