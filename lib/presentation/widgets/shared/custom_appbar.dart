@@ -2,7 +2,6 @@
 
 import 'package:cinema_movie/domain/entities/movie.dart';
 import 'package:cinema_movie/presentation/delegates/search_movie_delegate.dart';
-import 'package:cinema_movie/presentation/providers/movies/movies_repository_provider.dart';
 import 'package:cinema_movie/presentation/providers/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
