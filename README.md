@@ -34,6 +34,7 @@ flutter pub run build_runner build
 [• card_swiper](https://pub.dev/packages/card_swiper)
 [• animate_do](https://pub.dev/packages/animate_do)
 [• intl](https://pub.dev/packages/intl)
+[• path_provider](https://pub.dev/packages/path_provider)
 
 
 <br/>
