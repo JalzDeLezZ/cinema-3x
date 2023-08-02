@@ -20,6 +20,8 @@
 1. Copy the file .env.example and rename it to .env
 2. Add your API KEY in the .env file
 3. Run the project
+3. Entity Changes, run the generator DB
+flutter pub run build_runner build
 ```
 
 <br/>
@@ -76,6 +78,18 @@ $ flutter run
 $ flutter pub add provider
 $ flutter pub add dio
 
+# Isar DB Implementation
+• https://isar.dev/es/tutorials/quickstart.html
+1. Add Dependencies
+flutter pub add isar isar_flutter_libs
+flutter pub add -d isar_generator build_runner
+2. Write down the classes
+import 'package:isar/isar.dart';
+Id? isarId; // you can also use id = null to auto increment
+3. Run the generator
+flutter pub run build_runner build
+4. Open an instance of Isar
+5. Read and write data
 ```
 </details><br/>
 
@@ -88,6 +102,9 @@ $ flutter pub add dio
 [• Notes Flutter](https://devtalles.com/files/flutter-cheat-sheet.pdf)
 
 [• QuickType](https://app.quicktype.io/)
+
+[• Storage](https://pub.dev/packages/shared_preferences)
+[• Isar DB](https://isar.dev/es/)
 
 [• TMDB API](https://www.themoviedb.org/settings/api)
 <!-- user: jalzdelezz -> jameslo***gmail.com -->
