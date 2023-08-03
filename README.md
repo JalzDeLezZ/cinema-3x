@@ -91,6 +91,7 @@ Id? isarId; // you can also use id = null to auto increment
 flutter pub run build_runner build
 4. Open an instance of Isar
 5. Read and write data
+# https://inspect.isar.dev/3.1.0+1/#/64985/x9Mg0VOx0Fg
 ```
 </details><br/>
 
