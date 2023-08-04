@@ -35,6 +35,7 @@ flutter pub run build_runner build
 [• animate_do](https://pub.dev/packages/animate_do)
 [• intl](https://pub.dev/packages/intl)
 [• path_provider](https://pub.dev/packages/path_provider)
+[• flutter_staggered_grid_view](https://pub.dev/packages/flutter_staggered_grid_view)
 
 
 <br/>

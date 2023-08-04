@@ -48,7 +48,8 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
   }
 }
 
-final isFavoriteProvider = FutureProvider.family.autoDispose((ref, int movieId) {
+final isFavoriteProvider =
+    FutureProvider.family.autoDispose((ref, int movieId) {
   final localStorageRepository = ref.watch(localStorageRepositoryProvider);
   return localStorageRepository.isMovieFavorite(movieId);
 });
@@ -72,7 +73,10 @@ class _CustomSliverAppBar extends ConsumerWidget {
         actions: [
           IconButton(
             onPressed: () async {
-              await ref.watch(localStorageRepositoryProvider).toggleFavorite(movie);
+              // OLD: await ref.read(localStorageRepositoryProvider).toggleFavorite(movie);
+              await ref
+                  .read(favoriteMoviesProvider.notifier)
+                  .toggleFavorite(movie);
               ref.invalidate(isFavoriteProvider(movie.id));
             },
             icon: isFavoriteFuture.when(
