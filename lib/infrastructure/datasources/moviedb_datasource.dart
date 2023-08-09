@@ -1,12 +1,14 @@
 // ignore_for_file: avoid_print
 
 import 'package:cinema_movie/config/constants/environment.dart';
+import 'package:cinema_movie/domain/entities/entities.dart';
 import 'package:cinema_movie/infrastructure/mappers/movie_mapper.dart';
+import 'package:cinema_movie/infrastructure/mappers/video_mapper.dart';
 import 'package:cinema_movie/infrastructure/models/moviedb/movie_details.dart';
 import 'package:cinema_movie/infrastructure/models/moviedb/moviedb_res.dart';
+import 'package:cinema_movie/infrastructure/models/moviedb/moviedb_videos.dart';
 import 'package:dio/dio.dart';
 import 'package:cinema_movie/domain/datasources/movies_datasource.dart';
-import 'package:cinema_movie/domain/entities/movie.dart';
 
 class MoviedbDatasource extends MoviesDataSource {
   final dio = Dio(
@@ -61,22 +63,41 @@ class MoviedbDatasource extends MoviesDataSource {
   Future<Movie> getMovieById(String id) async {
     final res = await dio.get('/movie/$id');
 
-    if(res.statusCode != 200) throw Exception('Movie with id $id not found');
+    if (res.statusCode != 200) throw Exception('Movie with id $id not found');
 
     final movieDetails = MovieDetail.fromJson(res.data);
 
     return MovieMapper.movieDetailsToEntity(movieDetails);
-    
   }
-  
+
   @override
   Future<List<Movie>> searchMovies(String query) async {
-
-    if(query.isEmpty) return [];
+    if (query.isEmpty) return [];
 
     final res = await dio.get('/search/movie', queryParameters: {
       'query': query,
     });
     return _jsonToMovie(res.data);
+  }
+
+  @override
+  Future<List<Movie>> getSimilarMovies(int movieId) async {
+    final response = await dio.get('/movie/$movieId/similar');
+    return _jsonToMovie(response.data);
+  }
+
+  @override
+  Future<List<Video>> getYoutubeVideosById(int movieId) async {
+    final response = await dio.get('/movie/$movieId/videos');
+    print(response.data.toString());
+    final moviedbVideosReponse = MoviedbVideosResponse.fromJson(response.data);
+
+    final List<Video> videos = List<Video>.from(moviedbVideosReponse.results
+        .where((element) => element.site == 'YouTube')
+        .take(1)
+        .map((e) => VideoMapper.moviedbVideoToEntity(e))
+        .toList());
+
+    return videos;
   }
 }

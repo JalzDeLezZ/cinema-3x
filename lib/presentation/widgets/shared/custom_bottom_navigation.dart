@@ -13,9 +13,6 @@ class CustomBottomNavigation extends StatelessWidget {
       case 1:
         context.go('/home/1');
         break;
-      case 2:
-        context.go('/home/2');
-        break;
       default:
         context.go('/home/0');
     }
@@ -23,16 +20,45 @@ class CustomBottomNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-        currentIndex: currentIndex,
-        onTap: (value) => onItemTapped(context, value),
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home_max), label: 'Inicio'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.label_outline), label: 'Categorias'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.favorite_outline), label: 'Favoritos'),
-        ],
-        elevation: 0);
+    final colors = Theme.of(context).colorScheme;
+    final decoration = BoxDecoration(
+      color: Colors.transparent,
+      // borderRadius: const BorderRadius.only(
+      //   topLeft: Radius.circular(30),
+      //   topRight: Radius.circular(30),
+      // ),
+      boxShadow: <BoxShadow>[
+        BoxShadow(
+          color: colors.primary,
+          blurRadius: 10,
+          // offset: const Offset(0, 10),
+        ),
+      ],
+    );
+    return Container(
+      decoration: decoration,
+      // child: ClipRRect(
+      //   borderRadius: const BorderRadius.only(
+      //       topLeft: Radius.circular(30), topRight: Radius.circular(30)),
+        child: BottomNavigationBar(
+          // type: BottomNavigationBarType.shifting,
+          // showSelectedLabels: false,
+          // showUnselectedLabels: false,
+          elevation: 0,
+          backgroundColor: Colors.grey[800],
+          selectedItemColor: colors.primary,
+          unselectedItemColor: Colors.white54,
+          currentIndex: currentIndex,
+          onTap: (value) => onItemTapped(context, value),
+          items: const [
+            BottomNavigationBarItem(
+                icon: Icon(Icons.home_max), label: 'Inicio'),
+            
+            BottomNavigationBarItem(
+                icon: Icon(Icons.favorite_outline), label: 'Favoritos'),
+          ],
+        ),
+      // ),
+    );
   }
 }

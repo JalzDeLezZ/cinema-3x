@@ -11,7 +11,6 @@ class HomeScreen extends StatelessWidget {
 
   final viewRoutes = [
     const HomeView(),
-    const Center(child: Text('Search')),
     const FavoritesView()
   ];
 
@@ -22,6 +21,16 @@ class HomeScreen extends StatelessWidget {
         index: pageIndex,
         children: viewRoutes,
       ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.white,
+        onPressed: () => print('Dark Mode'),
+        child: const Icon(
+          Icons.dark_mode,
+          color: Colors.black,
+        ),
+        tooltip: 'Dark Mode',
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: CustomBottomNavigation(currentIndex: pageIndex),
     );
   }

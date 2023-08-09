@@ -36,6 +36,8 @@ flutter pub run build_runner build
 [• intl](https://pub.dev/packages/intl)
 [• path_provider](https://pub.dev/packages/path_provider)
 [• flutter_staggered_grid_view](https://pub.dev/packages/flutter_staggered_grid_view)
+[• youtube_player_flutter](https://pub.dev/packages/youtube_player_flutter)
+[• flutter_inappwebview](https://pub.dev/packages/flutter_inappwebview)
 
 
 <br/>

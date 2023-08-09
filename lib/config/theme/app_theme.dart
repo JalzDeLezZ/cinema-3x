@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class AppTheme {
   ThemeData getTheme() => ThemeData(
         useMaterial3: true,
-        colorSchemeSeed: const Color(0xFF2687C3),
+        colorSchemeSeed: Colors.blue,
+        brightness: Brightness.dark
       );
 }

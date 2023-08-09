@@ -1,6 +1,8 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cinema_movie/domain/entities/movie.dart';
 import 'package:cinema_movie/presentation/providers/providers.dart';
+import 'package:cinema_movie/presentation/widgets/movies/similar_movies.dart';
+import 'package:cinema_movie/presentation/widgets/videos/videos_from_movie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -172,6 +174,12 @@ class _MovieDetails extends StatelessWidget {
 
         //! Actors
         _ActorsByMovie(movieId: movie.id.toString()),
+
+        //* Videos de la película (si tiene)
+        VideosFromMovie(movieId: movie.id),
+
+        //* Películas similares
+        SimilarMovies(movieId: movie.id),
 
         const SizedBox(height: 40),
       ],
