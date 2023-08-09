@@ -1,7 +1,9 @@
+import 'package:cinema_movie/presentation/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class CustomBottomNavigation extends StatelessWidget {
+class CustomBottomNavigation extends ConsumerWidget {
   const CustomBottomNavigation({super.key, required this.currentIndex});
 
   final int currentIndex;
@@ -19,7 +21,8 @@ class CustomBottomNavigation extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
+    final isDarkMode = ref.watch(themeNotifierProvider).isDarkmode;
     final colors = Theme.of(context).colorScheme;
     final decoration = BoxDecoration(
       color: Colors.transparent,
@@ -45,9 +48,9 @@ class CustomBottomNavigation extends StatelessWidget {
           // showSelectedLabels: false,
           // showUnselectedLabels: false,
           elevation: 0,
-          backgroundColor: Colors.grey[800],
+          backgroundColor: isDarkMode ? Colors.black : Colors.white,
           selectedItemColor: colors.primary,
-          unselectedItemColor: Colors.white54,
+          unselectedItemColor: Colors.grey,
           currentIndex: currentIndex,
           onTap: (value) => onItemTapped(context, value),
           items: const [
